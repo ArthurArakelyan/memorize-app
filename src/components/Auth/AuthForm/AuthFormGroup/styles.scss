@@ -1,0 +1,44 @@
+@import "./src/assets/variables";
+
+.auth-form__group {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &:not(:first-child) {
+    margin-top: 15px;
+  }
+
+  &:focus-within label {
+    color: $primary-light;
+  }
+
+  &.invalid label {
+    color: red !important;
+  }
+  &.invalid input {
+    border-color: red !important;
+  }
+}
+.auth-form__group_label {
+  font-size: 14px;
+  font-weight: 500;
+  align-self: flex-start;
+  color: $info;
+  transition: color .2s ease-in-out;
+}
+.auth-form__group_input {
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 3px;
+  border: 1px solid $info;
+  padding: 7px;
+  font-size: 16px;
+  transition: border-color .2s ease-in-out;
+
+  &:focus {
+    border-color: $primary-light;
+  }
+}

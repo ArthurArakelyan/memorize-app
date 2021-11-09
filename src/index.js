@@ -1,11 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import App from './App';
+import initializeFirebaseApp from "./util/initializeFirebaseApp";
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
-import './index.scss';
+import App from "./App";
+
+import "./index.scss";
+
+import store from "./store/configureStore";
+
+initializeFirebaseApp();
 
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
