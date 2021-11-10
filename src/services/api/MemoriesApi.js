@@ -21,7 +21,10 @@ class MemoriesApi {
     try {
       const memoryRef = push(ref(database, `memories/${uid}`)).key;
       await set(ref(database, `memories/${uid}/${memoryRef}`), memory);
-      return memory;
+      return {
+        id: memoryRef,
+        ...memory
+      };
     } catch(error) {
       console.error(error);
       alert(error.message);

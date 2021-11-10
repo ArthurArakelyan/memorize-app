@@ -13,7 +13,7 @@ const reducer = (state = initialState, action = {}) => {
     case GET_USER:
       return payload;
     case DELETE_USER:
-      return {}
+      return {};
     default:
       return state;
   }

@@ -14,17 +14,19 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const {firstName, lastName} = useSelector(({userReducer}) => userReducer);
+
   useEffect(() => {
-    dispatch(getUser());
-  }, []);
+    if(!firstName && !lastName) {
+      dispatch(getUser());
+    }
+  }, [firstName, lastName]);
 
   const handleLogout = () => {
     removeUserFromLocalStorage();
     dispatch(deleteUserAction());
     navigate('/signIn');
   }
-
-  const {firstName, lastName} = useSelector(({userReducer}) => userReducer);
 
   return (
     <header className="header">
