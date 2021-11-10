@@ -1,7 +1,9 @@
 import memoriesReducer from "./memories/reducer";
+import userReducer from "./user/reducer";
 
 const reducers = {
-  memoriesReducer
+  memoriesReducer,
+  userReducer
 };
 
 export default reducers;

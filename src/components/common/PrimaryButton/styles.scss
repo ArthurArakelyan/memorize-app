@@ -1,0 +1,19 @@
+@import "./src/assets/variables";
+
+.button-primary {
+  padding: 11px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: $primary;
+  color: #ffffff;
+  border-radius: 6px;
+  transition: background-color .2s ease-in-out;
+
+  &:hover {
+    background-color: $primary-light;
+  }
+
+  &:active {
+    background-color: $primary-dark;
+  }
+}

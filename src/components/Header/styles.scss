@@ -1,0 +1,29 @@
+@import "./src/assets/variables";
+
+.header {
+  padding: 15px 0;
+  background-color: $secondary-dark;
+}
+.header-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+}
+.header-logo {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.header-nav__profile {
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 20px;
+}
+.header-nav__logout {
+  font-size: 14px;
+  font-weight: 400;
+  padding: 7px 10px;
+  border-radius: 3px;
+}

@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 
 import AuthFormGroup from "./AuthFormGroup";
+import PrimaryButton from "../../common/PrimaryButton";
 
 import "./styles.scss";
 
@@ -17,8 +18,8 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
           handleChange={handleChange}
         />;
       })}
-      <button className="auth-form__submit">{type}</button>
-      <Link to="/signUp" className="auth-form__link">
+      <PrimaryButton className="auth-form__submit">{type}</PrimaryButton>
+      <Link to={`/${type === 'Sign In' ? 'signUp' : 'signIn'}`} className="auth-form__link">
         {type === 'Sign In' ? 'Sign Up' : 'Sign In'}
       </Link>
     </form>

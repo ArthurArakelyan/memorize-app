@@ -3,6 +3,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import SignIn from "./pages/signIn";
 import SignUp from "./pages/signUp";
+import Header from "./components/Header";
 import Home from "./pages/home";
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
       <Routes>
         <Route exact path='/' element={
           <PrivateRoute>
+            <Header />
             <Home />
           </PrivateRoute>
         } />
