@@ -1,4 +1,4 @@
-@import "../../assets/scss/variables";
+@import "../../../assets/scss/variables";
 
 .home-memory {
   width: 30%;
@@ -42,7 +42,7 @@
   padding: 5px;
 }
 .home-memory__footer_date {
-  color: $secondary;
+  color: $secondary-dark;
   font-size: 12px;
   line-break: anywhere;
 }

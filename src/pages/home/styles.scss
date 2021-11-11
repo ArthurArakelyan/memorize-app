@@ -1,13 +1,16 @@
 @import "../../assets/scss/variables";
 
+.home {
+  padding-top: 98px;
+}
 .home-content {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
-  margin-top: 40px;
 }
 .home-memories__wrapper {
+  position: relative;
   width: 65%;
   display: flex;
   align-items: flex-start;
@@ -17,19 +20,12 @@
 .home-memories__heading {
   font-size: 20px;
 }
-.home-memories {
-  width: 100%;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-}
 
 .home-form {
   width: 30%;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
 .home-form__group {
@@ -81,6 +77,7 @@
   resize: none;
   min-height: 90px;
   max-height: 100px;
+  font-size: 14px;
 }
 .home-form__submit {
   text-transform: uppercase;

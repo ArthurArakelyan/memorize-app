@@ -1,0 +1,33 @@
+@import "./src/assets/scss/variables";
+
+.home-memories {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.home-memories__empty {
+  margin-top: 25px;
+  font-size: 18px;
+
+  button {
+    font-weight: 500;
+    color: $primary;
+    transition: color .1s ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $primary-darker;
+    }
+  }
+}
+.home-memories__error {
+  margin-top: 25px;
+  font-size: 18px;
+  font-weight: 500;
+  color: red;
+}

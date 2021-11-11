@@ -1,11 +1,9 @@
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useState, useRef} from "react";
+import {useDispatch} from "react-redux";
 
-import {getMemories, setMemory} from "../../store/memories/actions";
+import Memories from "../../components/Memories";
 
-import Memory from "../../components/Memory";
-
-import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
+import {setMemory} from "../../store/memories/actions";
 
 import {isValid, validate} from "../../services/validators";
 
@@ -15,19 +13,14 @@ import "./styles.scss";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const user = getUserFromLocalStorage();
+
+  const titleInputRef = useRef(null);
 
   const [data, setData] = useState({
     title: '',
     description: ''
   });
   const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    dispatch(getMemories(user.uid));
-  }, []);
-
-  const memories = useSelector(({memoriesReducer}) => memoriesReducer);
 
   const handleChange = ({target: {name, value}}) => {
     setData((data) => ({
@@ -39,6 +32,7 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
     if(validate(data)) {
       const date = new Date();
       setData({title: '', description: ''});
@@ -60,9 +54,7 @@ const Home = () => {
               <h2 className="home-memories__heading">
                 Memories
               </h2>
-              <div className="home-memories">
-                {memories.map((memory) => <Memory key={memory.id} memory={memory} />)}
-              </div>
+              <Memories inputRef={titleInputRef} />
             </div>
             <form onSubmit={handleSubmit} className="home-form">
               {homeGroups.map(({name, label}) => {
@@ -72,6 +64,7 @@ const Home = () => {
                     <label className="home-form__group_label" htmlFor={name}>{label}</label>
                     {name === 'title' ?
                       <input
+                        ref={titleInputRef}
                         className="home-form__group_input"
                         type="text"
                         value={data[name]}
@@ -96,9 +89,7 @@ const Home = () => {
                   </div>
                 )
               })}
-              <button className="home-form__submit">
-                post
-              </button>
+              <button className="home-form__submit">post</button>
             </form>
           </div>
         </div>

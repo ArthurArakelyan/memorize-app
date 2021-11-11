@@ -18,9 +18,9 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
           handleChange={handleChange}
         />;
       })}
-      <PrimaryButton className="auth-form__submit">{type}</PrimaryButton>
-      <Link to={`/${type === 'Sign In' ? 'signUp' : 'signIn'}`} className="auth-form__link">
-        {type === 'Sign In' ? 'Sign Up' : 'Sign In'}
+      <PrimaryButton className="auth-form__submit">{type.name}</PrimaryButton>
+      <Link to={type.link} className="auth-form__link">
+        {type.linkName}
       </Link>
     </form>
   );

@@ -18,13 +18,6 @@ const SignIn = () => {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = ({target: {name, value}}) => {
-    setData((data) => ({
-      ...data,
-      [name]: value
-    }));
-  }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const {email, password} = data;
@@ -40,9 +33,13 @@ const SignIn = () => {
     <Auth
       groups={signInGroups}
       data={data}
+      setData={setData}
       submitted={submitted}
-      type="Sign In"
-      handleChange={handleChange}
+      type={{
+        name: 'Sign In',
+        link: '/signUp',
+        linkName: 'Sign Up'
+      }}
       handleSubmit={handleSubmit}
     />
   );
