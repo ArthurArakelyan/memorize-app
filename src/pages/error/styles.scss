@@ -1,0 +1,41 @@
+@import "./src/assets/scss/variables";
+
+.error {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.error-content {
+  transform: translateY(-150%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media only screen and (max-height: 420px) {
+    transform: translateY(-100%);
+  }
+
+  @media only screen and (max-height: 310px) {
+    transform: translateY(-50%);
+  }
+
+  @media only screen and (max-height: 210px) {
+    transform: translateY(0);
+  }
+}
+.error-heading {
+  font-size: 32px;
+  font-weight: 600;
+  color: red;
+  text-align: center;
+}
+.error-message {
+  font-size: 18px;
+  font-weight: 500;
+  color: $primary-darker;
+  margin-top: 15px;
+  text-align: center;
+}

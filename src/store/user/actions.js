@@ -10,7 +10,7 @@ export function getUser() {
     const user = await AuthApi.getUser(uid);
     dispatch({
       type: GET_USER,
-      payload: user
+      payload: user ? user : {}
     });
   }
 }
