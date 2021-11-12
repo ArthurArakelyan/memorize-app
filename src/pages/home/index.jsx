@@ -1,6 +1,7 @@
 import {useState, useRef} from "react";
 import {useDispatch} from "react-redux";
 
+import Main from "../../components/common/Main";
 import Memories from "../../components/Memories";
 
 import {setMemory} from "../../store/memories/actions";
@@ -46,7 +47,7 @@ const Home = () => {
   }
 
   return (
-    <main>
+    <Main>
       <div className="home">
         <div className="container">
           <div className="home-content">
@@ -94,7 +95,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </main>
+    </Main>
   );
 }
 
