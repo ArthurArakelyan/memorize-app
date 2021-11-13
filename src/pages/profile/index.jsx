@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 
 import Main from "../../components/common/Main";
+import Fields from "./Fields";
 
 import {setUserImgAction, deleteUserImgAction} from "../../store/user/actions";
 
@@ -11,15 +12,22 @@ import "./styles.scss";
 const Profile = () => {
   const dispatch = useDispatch();
 
-  const {firstName, lastName, email, imgUrl} = useSelector(({userReducer}) => userReducer);
+  const {firstName, lastName, imgUrl} = useSelector(({userReducer}) => userReducer);
 
   const handleAvatarRemove = () => {
     dispatch(deleteUserImgAction());
   }
 
   const handleAvatarChange = ({target: {files}}) => {
-    if(files && files[0]) {
+    if((files && files[0])
+      && (files[0].type.includes('image') || files[0].type.includes('gif'))
+      && files[0].size <= 5000000
+    ) {
       dispatch(setUserImgAction(files[0]));
+    } else if(files[0].size > 5000000) {
+      alert('No more 5MB file size!');
+    } else if(!files[0].type.includes('image') || !files[0].type.includes('gif')) {
+      alert('Only image type files');
     }
   }
 
@@ -49,9 +57,15 @@ const Profile = () => {
                   </label>
                 </div>
               </div>
+              <div className="profile-info__card">
+                <h3 className="profile-info__card_name">
+                  {`${firstName} ${lastName}`}
+                </h3>
+              </div>
             </div>
-            <div className="profile-fields">
-
+            <div className="profile-edit">
+              <h3 className="profile-edit__heading">Edit Profile</h3>
+              <Fields />
             </div>
           </div>
         </div>

@@ -7,9 +7,6 @@ const AuthFormGroup = ({group, value, data, submitted, handleChange}) => {
 
   return (
     <div className={`auth-form__group ${!isValid(name, data) && submitted ? 'invalid' : ''}`}>
-      <label className="auth-form__group_label" htmlFor={name}>
-        {label}
-      </label>
       <input
         className="auth-form__group_input"
         value={value}
@@ -18,6 +15,9 @@ const AuthFormGroup = ({group, value, data, submitted, handleChange}) => {
         id={name}
         onChange={handleChange}
       />
+      <label className="auth-form__group_label" htmlFor={name}>
+        {label}
+      </label>
     </div>
   );
 }

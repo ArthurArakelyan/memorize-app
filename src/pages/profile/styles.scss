@@ -84,11 +84,22 @@
     color: $primary-darker;
   }
 }
+.profile-info__card {
+  padding-top: 16px;
+}
+.profile-info__card_name {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.25;
+}
 
-.profile-fields {
-  width: 40%;
+.profile-edit {
+  width: 30%;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
+}
+.profile-edit__heading {
+  font-size: 22px;
 }

@@ -1,0 +1,99 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+
+.profile-edit__field {
+  @include field();
+
+  &:hover {
+    .profile-edit__field_name_button {
+      opacity: 1;
+    }
+  }
+}
+.profile-edit__field_name_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 7px;
+}
+.profile-edit__field_name {
+  font-size: 16px;
+  line-height: 25px;
+  padding-left: 5px;
+  width: 80%;
+  line-break: anywhere;
+}
+.profile-edit__field_name_form {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-edit__field_name_form_input {
+  width: 100%;
+  min-height: 25px;
+  max-height: 25px;
+  line-height: 25px;
+  border: 1px solid $info;
+  padding: 0 4px;
+  border-radius: 6px;
+  transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 2px $primary;
+  }
+}
+.profile-edit__field_name_buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.profile-edit__field_name_button {
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity .2s ease-in-out, color .2s ease-in-out;
+
+  &.edit {
+    color: $secondary-darker;
+
+    &:hover {
+      color: $secondary;
+    }
+
+    &:active {
+      color: $secondary-lighter;
+    }
+  }
+
+  &.save {
+    color: $primary;
+    opacity: 1;
+    margin-right: 10px;
+
+    &:hover {
+      color: $primary-lighter;
+    }
+
+    &:active {
+      color: $primary-dark;
+    }
+  }
+
+  &.cancel {
+    color: red;
+    opacity: 1;
+
+    &:hover {
+      color: darkred;
+    }
+  }
+}
+.profile-edit__field_input {
+  @include input();
+}
+.profile-edit__field_label {
+  color: $primary !important;
+  @include label();
+}

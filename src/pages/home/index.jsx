@@ -62,7 +62,6 @@ const Home = () => {
                 const valid = !isValid(name, data) && submitted ? 'invalid' : '';
                 return (
                   <div key={name} className={`home-form__group ${valid}`}>
-                    <label className="home-form__group_label" htmlFor={name}>{label}</label>
                     {name === 'title' ?
                       <input
                         ref={titleInputRef}
@@ -87,6 +86,7 @@ const Home = () => {
                         id={name}
                       />
                     }
+                    <label className="home-form__group_label" htmlFor={name}>{label}</label>
                   </div>
                 )
               })}

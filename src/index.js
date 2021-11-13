@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
-import ErrorBoundry from "./components/ErrorBoundry";
+import ErrorBoundry from "./components/common/ErrorBoundry";
 
 import App from "./App";
 

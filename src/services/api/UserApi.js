@@ -1,11 +1,13 @@
 import initializeFirebaseApp from "../../util/initializeFirebaseApp";
 
+import {getAuth, updateEmail} from "firebase/auth";
 import {getDatabase, ref, set, remove, get} from "firebase/database";
 import {getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
 
 import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
 
 initializeFirebaseApp();
+const auth = getAuth();
 const database = getDatabase();
 const storage = getStorage();
 
@@ -37,6 +39,7 @@ class UserApi {
     }
   }
 
+  // img
   static async getUserImg() {
     try {
       const {uid} = getUserFromLocalStorage();
@@ -69,6 +72,39 @@ class UserApi {
       await deleteObject(storageRef(storage,`users/${uid}/avatar.jpg`));
       await remove(ref(database, `users/${uid}/imgUrl`));
       return true;
+    } catch(error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
+  // fields
+  static async changeUserField(field, newFieldValue) {
+    try {
+      const {uid} = getUserFromLocalStorage();
+      await set(ref(database, `users/${uid}/${field}`), newFieldValue);
+      return newFieldValue;
+    } catch(error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
+  static async changeUserEmail(email) {
+    try {
+      const user = auth.currentUser;
+      const response = await this.changeUserField('email', email);
+      if(response) {
+        try {
+          await updateEmail(user, email);
+        } catch(error) {
+          alert('Try log out and sign in for email change.');
+          console.error(error);
+          console.dir(error);
+          console.log(error.code);
+          alert(error.message);
+        }
+      }
     } catch(error) {
       console.error(error);
       alert(error.message);

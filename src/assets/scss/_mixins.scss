@@ -1,0 +1,63 @@
+@import "./variables";
+
+@mixin label() {
+  font-size: 16px;
+  font-weight: 400;
+  color: $info;
+  transition: color .2s ease-in-out;
+}
+
+@mixin input() {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid $info;
+  padding: 7px;
+  font-size: 16px;
+  transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+  &:hover {
+    border-color: $primary-lighter;
+  }
+  &:hover + label {
+    color: $primary-lighter;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 3px $primary-light;
+  }
+  &:focus + label {
+    color: $primary;
+  }
+}
+
+@mixin textarea() {
+  resize: none;
+  min-height: 90px;
+  max-height: 100px;
+  font-size: 14px;
+}
+
+@mixin field() {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column-reverse;
+
+  &:not(:first-child) {
+    margin-top: 15px;
+  }
+
+  &.invalid input {
+    border-color: red !important;
+  }
+  &.invalid input:focus {
+    box-shadow: 0 0 3px red !important;
+  }
+
+  &.invalid label {
+    color: red !important;
+  }
+}

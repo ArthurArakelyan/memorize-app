@@ -1,4 +1,5 @@
 @import "../../assets/scss/variables";
+@import "../../assets/scss/mixins";
 
 .home-content {
   width: 100%;
@@ -26,55 +27,16 @@
   flex-direction: column;
 }
 .home-form__group {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-
-  &:not(:first-child) {
-    margin-top: 20px;
-  }
-
-  &.invalid {
-    label {
-      color: red !important;
-    }
-    input, textarea {
-      border-color: red !important;
-    }
-  }
-
-  &:focus-within {
-    label {
-      color: $primary;
-    }
-
-    input, textarea {
-      border-color: $primary;
-    }
-  }
+  @include field();
 }
 .home-form__group_label {
-  font-size: 14px;
-  font-weight: 500;
-  color: $info;
-  transition: color .2s ease-in-out;
+  @include label();
 }
 .home-form__group_input {
-  width: 100%;
-  margin-top: 7px;
-  border: 1px solid $info;
-  border-radius: 6px;
-  padding: 7px;
-  font-size: 16px;
-  transition: border-color .2s ease-in-out;
+  @include input();
 }
 .home-form__group_textarea {
-  resize: none;
-  min-height: 90px;
-  max-height: 100px;
-  font-size: 14px;
+  @include textarea();
 }
 .home-form__submit {
   text-transform: uppercase;

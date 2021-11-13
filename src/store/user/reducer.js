@@ -1,4 +1,4 @@
-import {DELETE_USER, GET_USER, SET_USER_IMG, DELETE_USER_IMG} from "./actionTypes";
+import {DELETE_USER, GET_USER, SET_USER_IMG, DELETE_USER_IMG, CHANGE_USER_FIELD, CHANGE_USER_EMAIL} from "./actionTypes";
 
 const initialState = {
   email: '',
@@ -23,12 +23,21 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         imgUrl: payload
       }
-    case DELETE_USER_IMG: {
+    case DELETE_USER_IMG:
       return {
         ...state,
         imgUrl: ''
       }
-    }
+    case CHANGE_USER_FIELD:
+      return {
+        ...state,
+        [payload.field]: payload.newFieldValue
+      }
+    case CHANGE_USER_EMAIL:
+      return {
+        ...state,
+        email: payload
+      }
     default:
       return state;
   }
