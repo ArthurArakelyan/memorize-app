@@ -5,7 +5,7 @@ import Fields from "./Fields";
 
 import {setUserImgAction, deleteUserImgAction} from "../../store/user/actions";
 
-import avatar from "../../assets/images/avatar.png";
+import avatar from "../../assets/images/avatar.jpg";
 
 import "./styles.scss";
 

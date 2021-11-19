@@ -2,16 +2,40 @@
 
 .auth {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.sign-in {
+    .auth-content {
+      @media only screen and (max-height: 350px) {
+        margin: 20px 0;
+      }
+    }
+  }
+
+  &.sign-up {
+    .auth-content {
+      @media only screen and (max-height: 580px) {
+        margin: 20px 0;
+      }
+    }
+  }
 }
 .auth-content {
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 992px) {
+    width: 70%;
+  }
+
+  @media only screen and (max-width: 672px) {
+    width: 90%;
+  }
 }
 .auth-form__wrapper {
   width: 100%;

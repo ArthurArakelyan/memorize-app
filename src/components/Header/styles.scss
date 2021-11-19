@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   width: 100%;
-  padding: 15px 0;
+  padding: 14px 0;
   background-color: $secondary-dark;
 }
 .header-content {
@@ -19,10 +19,30 @@
   font-weight: 500;
 }
 
+.header-nav {
+  display: flex;
+  align-items: center;
+}
 .header-nav__profile {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-weight: 400;
   margin-right: 20px;
+}
+.header-nav__profile_avatar_wrapper {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.header-nav__profile_avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .header-nav__logout {
   font-size: 14px;

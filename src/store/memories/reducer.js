@@ -1,4 +1,4 @@
-import {GET_MEMORIES, SET_MEMORY, DELETE_MEMORY} from "./actionTypes";
+import {GET_MEMORIES, SET_MEMORY, DELETE_MEMORY, DELETE_MEMORIES} from "./actionTypes";
 
 const initialState = {
   memories: [],
@@ -16,15 +16,15 @@ const memoriesReducer = (state = initialState, action = {}) => {
     case SET_MEMORY:
       return {
         ...state,
-        memories: [...memories, payload]
+        memories: [payload, ...memories]
       }
     case DELETE_MEMORY:
-      console.log(memories)
-      console.log(memories.filter(({id}) => id !== payload))
       return {
         ...state,
         memories: memories.filter(({id}) => id !== payload)
       }
+    case DELETE_MEMORIES:
+      return {...initialState};
     default:
       return state;
   }

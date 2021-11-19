@@ -11,7 +11,9 @@ class MemoriesApi {
   static async getMemories(uid) {
     try {
       const response = await get(ref(database,`memories/${uid}`));
-      return objectToArray(response.val());
+      return objectToArray(response.val()).sort((prev, current) => {
+        return new Date(current.date) - new Date(prev.date);
+      });
     } catch(error) {
       console.error(error);
       alert(error.message);

@@ -41,6 +41,7 @@ const SignUp = () => {
       submitted={submitted}
       type={{
         name: 'Sign Up',
+        className: 'sign-up',
         link: '/signIn',
         linkName: 'Sign In'
       }}

@@ -17,7 +17,7 @@ const reducer = (state = initialState, action = {}) => {
         ...payload
       }
     case DELETE_USER:
-      return {};
+      return {...initialState};
     case SET_USER_IMG:
       return {
         ...state,

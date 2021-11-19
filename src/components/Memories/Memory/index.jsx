@@ -1,6 +1,8 @@
 import "./styles.scss";
 
 const Memory = ({memory}) => {
+  const date = new Date(memory.date);
+
   return (
     <div className="home-memory">
       <div className="home-memory__header">
@@ -10,8 +12,8 @@ const Memory = ({memory}) => {
         <p className="home-memory__description">{memory.description}</p>
       </div>
       <div className="home-memory__footer">
-        <p className="home-memory__footer_date">{memory.date}</p>
-        <p className="home-memory__footer_date">{memory.time}</p>
+        <p className="home-memory__footer_date">{date.toLocaleDateString()}</p>
+        <p className="home-memory__footer_date">{date.toLocaleTimeString()}</p>
       </div>
     </div>
   );

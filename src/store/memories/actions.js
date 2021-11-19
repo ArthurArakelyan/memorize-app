@@ -1,6 +1,6 @@
 import MemoriesApi from "../../services/api/MemoriesApi";
 
-import {GET_MEMORIES, SET_MEMORY, DELETE_MEMORY} from "./actionTypes";
+import {GET_MEMORIES, SET_MEMORY, DELETE_MEMORY, DELETE_MEMORIES} from "./actionTypes";
 
 export function getMemories(uid) {
   return async (dispatch) => {
@@ -40,4 +40,8 @@ export function deleteMemory(id) {
       });
     }
   }
+}
+
+export function deleteMemoriesAction() {
+  return {type: DELETE_MEMORIES};
 }

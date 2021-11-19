@@ -1,3 +1,4 @@
 export const GET_MEMORIES = 'GET_MEMORIES';
 export const SET_MEMORY = 'SET_MEMORY';
 export const DELETE_MEMORY = 'DELETE_MEMORY';
+export const DELETE_MEMORIES = 'DELETE_MEMORIES';

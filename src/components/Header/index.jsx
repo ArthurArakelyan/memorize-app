@@ -5,8 +5,11 @@ import {Link, useNavigate} from "react-router-dom";
 import removeUserFromLocalStorage from "../../util/removeUserFromLocalStorage";
 
 import {getUser, deleteUserAction} from "../../store/user/actions";
+import {deleteMemoriesAction} from "../../store/memories/actions";
 
 import PrimaryButton from "../common/PrimaryButton";
+
+import avatar from "../../assets/images/avatar.jpg";
 
 import "./styles.scss";
 
@@ -14,7 +17,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {firstName, lastName} = useSelector(({userReducer}) => userReducer);
+  const {firstName, lastName, imgUrl} = useSelector(({userReducer}) => userReducer);
 
   useEffect(() => {
     if(!firstName && !lastName) {
@@ -25,6 +28,7 @@ const Header = () => {
   const handleLogout = () => {
     removeUserFromLocalStorage();
     dispatch(deleteUserAction());
+    dispatch(deleteMemoriesAction());
     navigate('/signIn');
   }
 
@@ -37,7 +41,10 @@ const Header = () => {
           </h1>
           <nav className="header-nav">
             <Link className="header-nav__profile" to="/profile">
-              {`${firstName} ${lastName}`}
+              <span>{`${firstName} ${lastName}`}</span>
+              <div className="header-nav__profile_avatar_wrapper">
+                <img className="header-nav__profile_avatar" src={imgUrl ? imgUrl : avatar} alt="Avatar" />
+              </div>
             </Link>
             <PrimaryButton onClick={handleLogout} className="header-nav__logout">
               Log out

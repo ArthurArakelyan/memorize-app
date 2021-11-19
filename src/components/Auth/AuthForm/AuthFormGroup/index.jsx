@@ -2,7 +2,7 @@ import "./styles.scss";
 
 import {isValid} from "../../../../services/validators";
 
-const AuthFormGroup = ({group, value, data, submitted, handleChange}) => {
+const AuthFormGroup = ({group, value, data, submitted, autoFocus, handleChange}) => {
   const {name, type, label} = group;
 
   return (
@@ -13,6 +13,7 @@ const AuthFormGroup = ({group, value, data, submitted, handleChange}) => {
         type={type}
         name={name}
         id={name}
+        autoFocus={autoFocus}
         onChange={handleChange}
       />
       <label className="auth-form__group_label" htmlFor={name}>

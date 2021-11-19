@@ -7,10 +7,6 @@ import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
 import "./styles.scss";
 
 const Auth = ({type, data, setData, submitted, groups, handleSubmit}) => {
-  if(getUserFromLocalStorage()) {
-    return <Navigate to="/" />;
-  }
-
   const handleChange = ({target: {name, value}}) => {
     setData((data) => ({
       ...data,
@@ -18,8 +14,12 @@ const Auth = ({type, data, setData, submitted, groups, handleSubmit}) => {
     }));
   }
 
+  if(getUserFromLocalStorage()) {
+    return <Navigate to="/" />;
+  }
+
   return (
-    <div className="auth">
+    <div className={`auth ${type.className}`}>
       <div className="auth-content">
         <div className="auth-form__wrapper">
           <h2 className="auth-form__heading">{type.name}</h2>

@@ -35,12 +35,10 @@ const Home = () => {
     setSubmitted(true);
 
     if(validate(data)) {
-      const date = new Date();
       setData({title: '', description: ''});
       dispatch(setMemory({
         ...data,
-        date: date.toLocaleDateString(),
-        time: date.toLocaleTimeString()
+        date: Date.now()
       }));
       setSubmitted(false);
     }
