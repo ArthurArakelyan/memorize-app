@@ -42,17 +42,17 @@
   text-transform: uppercase;
   margin-top: 20px;
   color: #ffffff;
-  background-color: $secondary;
+  background-color: $primary;
   border-radius: 3px;
   padding: 8px 10px;
   font-size: 14px;
   transition: background-color .2s ease-in-out;
 
   &:hover {
-    background-color: $secondary-light;
+    background-color: $primary-light;
   }
 
   &:active {
-    background-color: $secondary-dark;
+    background-color: $primary-dark;
   }
 }
