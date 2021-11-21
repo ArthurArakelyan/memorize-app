@@ -4,7 +4,7 @@ import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
 
 const PrivateRoute = ({children}) => {
   const auth = getUserFromLocalStorage();
-  return auth ? <>{children}</> : <Navigate to="/signIn" />;
+  return auth ? children : <Navigate to="/signIn" />;
 }
 
 export default PrivateRoute;

@@ -1,6 +1,7 @@
 @import "../../../assets/scss/variables";
 
 .home-memory {
+  position: relative;
   width: 30%;
   border: 0.5px solid $info;
   border-radius: 7px;
@@ -9,7 +10,37 @@
   &:nth-child(3n + 2) {
     margin: 15px 10px 0;
   }
+
+  &:hover {
+    .home-memory__delete {
+      opacity: 1;
+      transform: scale(1);
+      user-select: auto;
+    }
+  }
 }
+
+.home-memory__delete {
+  position: absolute;
+  top: -5px;
+  right: -3px;
+  font-size: 12px;
+  opacity: 0;
+  transform: scale(0.6);
+  user-select: none;
+  color: red;
+  transition: color .2s ease-in-out, opacity .2s ease-in-out, transform .2s ease-in-out;
+
+  &:hover {
+    opacity: 0.7 !important;
+  }
+
+  &:active {
+    opacity: 1 !important;
+    color: darkred;
+  }
+}
+
 .home-memory__header {
   width: 100%;
   border-bottom: 1px solid $info;

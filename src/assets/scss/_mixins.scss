@@ -50,11 +50,14 @@
     margin-top: 15px;
   }
 
-  &.invalid input {
-    border-color: red !important;
-  }
-  &.invalid input:focus {
-    box-shadow: 0 0 3px red !important;
+  &.invalid {
+    input, textarea {
+      border-color: red !important;
+
+      &:focus {
+        box-shadow: 0 0 3px red !important;
+      }
+    }
   }
 
   &.invalid label {

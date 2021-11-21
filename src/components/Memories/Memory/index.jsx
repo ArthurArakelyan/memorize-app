@@ -1,10 +1,23 @@
+import {useDispatch} from "react-redux";
+
+import {deleteMemoryAction} from "../../../store/memories/actions";
+
 import "./styles.scss";
 
 const Memory = ({memory}) => {
+  const dispatch = useDispatch();
+
   const date = new Date(memory.date);
+
+  const handleDelete = () => {
+    dispatch(deleteMemoryAction(memory.id));
+  }
 
   return (
     <div className="home-memory">
+      <button onClick={handleDelete} className="home-memory__delete">
+        <i className="fas fa-times" />
+      </button>
       <div className="home-memory__header">
         <span className="home-memory__header_title">{memory.title}</span>
       </div>
