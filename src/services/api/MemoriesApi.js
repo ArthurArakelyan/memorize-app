@@ -1,15 +1,17 @@
 import {getDatabase, ref, get, push, remove, set} from "firebase/database";
 import initializeFirebaseApp from "../../util/initializeFirebaseApp";
 
-import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
+import AuthApi from "./AuthApi";
+
 import objectToArray from "../../util/objectToArray";
 
 initializeFirebaseApp();
 const database = getDatabase();
 
 class MemoriesApi {
-  static async getMemories(uid) {
+  static async getMemories() {
     try {
+      const uid = AuthApi.getUserId();
       const response = await get(ref(database,`memories/${uid}`));
       return objectToArray(response.val()).sort((prev, current) => {
         return new Date(current.date) - new Date(prev.date);
@@ -22,7 +24,7 @@ class MemoriesApi {
 
   static async setMemory(memory) {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       const memoryRef = push(ref(database, `memories/${uid}`)).key;
       await set(ref(database, `memories/${uid}/${memoryRef}`), memory);
       return {
@@ -37,7 +39,7 @@ class MemoriesApi {
 
   static async deleteMemory(id) {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       await remove(ref(database, `memories/${uid}/${id}`));
       return true;
     } catch(error) {

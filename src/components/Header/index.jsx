@@ -2,8 +2,6 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 
-import removeUserFromLocalStorage from "../../util/removeUserFromLocalStorage";
-
 import {setAuth} from "../../store/auth/actions";
 import {getUser, deleteUserAction} from "../../store/user/actions";
 import {deleteMemoriesAction} from "../../store/memories/actions";
@@ -27,11 +25,10 @@ const Header = () => {
   }, [firstName, lastName]);
 
   const handleLogout = () => {
-    removeUserFromLocalStorage();
     dispatch(deleteUserAction());
     dispatch(deleteMemoriesAction());
     dispatch(setAuth(null));
-    navigate('/signIn');
+    navigate('/login');
   }
 
   return (

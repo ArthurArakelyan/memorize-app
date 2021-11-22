@@ -6,19 +6,16 @@ import Loader from "../common/Loader";
 
 import {getMemories} from "../../store/memories/actions";
 
-import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
-
 import "./styles.scss";
 
 const Memories = ({inputRef}) => {
   const dispatch = useDispatch();
-  const user = getUserFromLocalStorage();
 
   const {memories, loading, error} = useSelector(({memoriesReducer}) => memoriesReducer);
 
   useEffect(() => {
     if(!memories.length) {
-      dispatch(getMemories(user.uid));
+      dispatch(getMemories());
     }
   }, []);
 

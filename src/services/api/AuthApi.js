@@ -4,8 +4,6 @@ import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} fro
 
 import UserApi from "./UserApi";
 
-import setUserToLocalStorage from "../../util/setUserToLocalStorage";
-
 initializeFirebaseApp();
 const auth = getAuth();
 
@@ -15,7 +13,6 @@ class AuthApi {
       const response = await signInWithEmailAndPassword(auth, email, password);
       const {user} = response;
 
-      setUserToLocalStorage(user);
       return user;
     } catch(error) {
       console.error(error);
@@ -28,7 +25,6 @@ class AuthApi {
       const response = await createUserWithEmailAndPassword(auth, email, password);
       const {user} = response;
 
-      setUserToLocalStorage(user);
       await UserApi.setUserToDatabase(firstName, lastName, email, user.uid);
 
       return user;
@@ -36,6 +32,10 @@ class AuthApi {
       console.error(error);
       alert(error.message);
     }
+  }
+
+  static getUserId() {
+    return auth.currentUser.uid;
   }
 
   static checkAuth(callback) {

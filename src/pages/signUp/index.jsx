@@ -41,7 +41,7 @@ const SignUp = () => {
       type={{
         name: 'Sign Up',
         className: 'sign-up',
-        link: '/signIn',
+        link: '/login',
         linkName: 'Sign In'
       }}
       handleSubmit={handleSubmit}

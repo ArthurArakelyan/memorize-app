@@ -4,7 +4,7 @@ import {getAuth, updateEmail} from "firebase/auth";
 import {getDatabase, ref, set, remove, get} from "firebase/database";
 import {getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
 
-import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
+import AuthApi from "./AuthApi";
 
 initializeFirebaseApp();
 const auth = getAuth();
@@ -27,7 +27,7 @@ class UserApi {
 
   static async getUser() {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       const response = await get(ref(database, `users/${uid}`));
       return {
         ...response.val(),
@@ -42,7 +42,7 @@ class UserApi {
   // img
   static async getUserImg() {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       return await getDownloadURL(storageRef(storage, `users/${uid}/avatar.jpg`));
     } catch(error) {
       console.error(error);
@@ -52,7 +52,7 @@ class UserApi {
 
   static async setUserImg(file) {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       const storageUserRef = storageRef(storage, `users/${uid}/avatar.jpg`);
 
       await uploadBytes(storageUserRef, file);
@@ -68,7 +68,7 @@ class UserApi {
 
   static async deleteUserImg() {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       await deleteObject(storageRef(storage,`users/${uid}/avatar.jpg`));
       await remove(ref(database, `users/${uid}/imgUrl`));
       return true;
@@ -81,7 +81,7 @@ class UserApi {
   // fields
   static async changeUserField(field, newFieldValue) {
     try {
-      const {uid} = getUserFromLocalStorage();
+      const uid = AuthApi.getUserId();
       await set(ref(database, `users/${uid}/${field}`), newFieldValue);
       return newFieldValue;
     } catch(error) {
@@ -94,14 +94,13 @@ class UserApi {
     try {
       const user = auth.currentUser;
       const response = await this.changeUserField('email', email);
+
       if(response) {
         try {
           await updateEmail(user, email);
         } catch(error) {
           alert('Try log out and sign in for email change.');
           console.error(error);
-          console.dir(error);
-          console.log(error.code);
           alert(error.message);
         }
       }

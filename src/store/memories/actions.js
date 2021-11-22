@@ -2,9 +2,9 @@ import MemoriesApi from "../../services/api/MemoriesApi";
 
 import {GET_MEMORIES, SET_MEMORY, DELETE_MEMORY, DELETE_MEMORIES} from "./actionTypes";
 
-export function getMemories(uid) {
+export function getMemories() {
   return async (dispatch) => {
-    const response = await MemoriesApi.getMemories(uid);
+    const response = await MemoriesApi.getMemories();
     dispatch({
       type: GET_MEMORIES,
       payload: response ? {
