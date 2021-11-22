@@ -1,3 +1,4 @@
+import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 import AuthFormGroup from "./AuthFormGroup";
@@ -6,8 +7,16 @@ import PrimaryButton from "../../common/PrimaryButton";
 import "./styles.scss";
 
 const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) => {
+  const isLoading = useSelector(({uiReducer}) => uiReducer);
+
+  const onSubmit = (e) => {
+    if(!isLoading) {
+      handleSubmit(e);
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="auth-form">
+    <form onSubmit={onSubmit} className="auth-form">
       {groups.map((group, index) => {
         return (
           <AuthFormGroup
@@ -21,7 +30,9 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
           />
         );
       })}
-      <PrimaryButton className="auth-form__submit">{type.name}</PrimaryButton>
+      <PrimaryButton className="auth-form__submit" disabled={isLoading}>
+        {type.name}
+      </PrimaryButton>
       <Link to={type.link} className="auth-form__link">
         {type.linkName}
       </Link>

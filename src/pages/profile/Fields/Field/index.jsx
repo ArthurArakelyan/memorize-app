@@ -10,13 +10,18 @@ const Field = ({field, editing, setEditing}) => {
   const dispatch = useDispatch();
 
   const user = useSelector(({userReducer}) => userReducer);
+  const isLoading = useSelector(({uiReducer}) => uiReducer);
 
   const fieldValue = user[field.name];
   const isEditing = editing === field.name;
 
   const [editingValue, setEditingValue] = useState(fieldValue);
 
-  const handleEdit = () => setEditing(field.name);
+  const handleEdit = () => {
+    if(!isLoading) {
+      setEditing(field.name);
+    }
+  }
 
   const handleCancel = () => {
     setEditing(null);
@@ -25,6 +30,8 @@ const Field = ({field, editing, setEditing}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(isLoading) return false;
 
     if(editingValue.trim() === fieldValue) {
       handleCancel();
@@ -69,15 +76,27 @@ const Field = ({field, editing, setEditing}) => {
         <div className="profile-edit__field_name_buttons">
           {isEditing ?
             <>
-              <button onClick={handleSubmit} className="profile-edit__field_name_button save">
+              <button
+                onClick={handleSubmit}
+                className="profile-edit__field_name_button save"
+                disabled={isLoading}
+              >
                 <i className="far fa-save" />
               </button>
-              <button onClick={handleCancel} className="profile-edit__field_name_button cancel">
+              <button
+                onClick={handleCancel}
+                className="profile-edit__field_name_button cancel"
+                disabled={isLoading}
+              >
                 <i className="fas fa-times" />
               </button>
             </>
             :
-            <button onClick={handleEdit} className="profile-edit__field_name_button edit">
+            <button
+              onClick={handleEdit}
+              className="profile-edit__field_name_button edit"
+              disabled={isLoading}
+            >
               <i className="fas fa-pencil-alt" />
             </button>
           }

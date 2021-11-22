@@ -14,11 +14,13 @@ const Memories = ({inputRef}) => {
   const dispatch = useDispatch();
   const user = getUserFromLocalStorage();
 
-  useEffect(() => {
-    dispatch(getMemories(user.uid));
-  }, []);
-
   const {memories, loading, error} = useSelector(({memoriesReducer}) => memoriesReducer);
+
+  useEffect(() => {
+    if(!memories.length) {
+      dispatch(getMemories(user.uid));
+    }
+  }, []);
 
   const handleFocus = () => inputRef?.current?.focus();
 

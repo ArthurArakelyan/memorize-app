@@ -52,6 +52,11 @@ button {
   background-color: transparent;
   border: none;
   padding: 0;
+
+  &:disabled {
+    cursor: default;
+    user-select: none;
+  }
 }
 
 *, *::before, *::after {

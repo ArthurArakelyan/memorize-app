@@ -1,16 +1,16 @@
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 import Auth from "../../components/Auth";
 
-import AuthApi from "../../services/api/AuthApi";
+import {signIn} from "../../store/auth/actions";
 
 import {validate} from "../../services/validators";
 
 import signInGroups from "../../constants/signInGroups";
 
 const SignIn = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     email: '',
@@ -25,7 +25,7 @@ const SignIn = () => {
     setSubmitted(true);
 
     if(validate(data)) {
-      AuthApi.signIn(email, password).then((res) => res ? navigate('/') : null);
+      dispatch(signIn(email, password));
     }
   }
 

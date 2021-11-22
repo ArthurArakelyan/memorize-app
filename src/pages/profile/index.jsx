@@ -19,15 +19,18 @@ const Profile = () => {
   }
 
   const handleAvatarChange = ({target: {files}}) => {
-    if((files && files[0])
-      && (files[0].type.includes('image') || files[0].type.includes('gif'))
-      && files[0].size <= 5000000
-    ) {
+    if((files && files[0])) {
+      if(!files[0].size > 5000000) {
+        alert('No more 5MB file size!');
+        return false;
+      }
+
+      if(files[0].type.includes('image') || !files[0].type.includes('gif')) {
+        alert('Only image type files');
+        return false;
+      }
+
       dispatch(setUserImgAction(files[0]));
-    } else if(files[0].size > 5000000) {
-      alert('No more 5MB file size!');
-    } else if(!files[0].type.includes('image') || !files[0].type.includes('gif')) {
-      alert('Only image type files');
     }
   }
 
@@ -53,7 +56,7 @@ const Profile = () => {
                     htmlFor="avatar-edit"
                   >
                     <input type="file" id="avatar-edit" onChange={handleAvatarChange} />
-                    <i className="far fa-file-image" />
+                    <i className="far fa-camera-retro" />
                   </label>
                 </div>
               </div>

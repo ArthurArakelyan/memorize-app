@@ -1,16 +1,16 @@
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 import Auth from "../../components/Auth";
 
 import signUpGroups from "../../constants/signUpGroups";
 
+import {signUp} from "../../store/auth/actions";
+
 import {validate} from "../../services/validators";
 
-import AuthApi from "../../services/api/AuthApi";
-
 const SignUp = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     firstName: '',
@@ -28,8 +28,7 @@ const SignUp = () => {
     setSubmitted(true);
 
     if(validate(data)) {
-      AuthApi.signUp(firstName, lastName, email, password)
-        .then((res) => res ? navigate('/') : null);
+      dispatch(signUp(firstName, lastName, email, password));
     }
   }
 

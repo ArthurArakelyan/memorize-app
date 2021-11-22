@@ -37,6 +37,10 @@ class AuthApi {
       alert(error.message);
     }
   }
+
+  static checkAuth(callback) {
+    return auth.onAuthStateChanged((user) => callback(user));
+  }
 }
 
 export default AuthApi;

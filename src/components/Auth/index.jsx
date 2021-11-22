@@ -1,21 +1,27 @@
-import {Navigate} from "react-router-dom";
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 import AuthForm from "./AuthForm";
-
-import getUserFromLocalStorage from "../../util/getUserFromLocalStorage";
 
 import "./styles.scss";
 
 const Auth = ({type, data, setData, submitted, groups, handleSubmit}) => {
+  const navigate = useNavigate();
+
+  const auth = useSelector(({authReducer}) => authReducer);
+
+  useEffect(() => {
+    if(auth) {
+      navigate('/');
+    }
+  }, [auth]);
+
   const handleChange = ({target: {name, value}}) => {
     setData((data) => ({
       ...data,
       [name]: value
     }));
-  }
-
-  if(getUserFromLocalStorage()) {
-    return <Navigate to="/" />;
   }
 
   return (

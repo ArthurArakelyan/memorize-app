@@ -58,6 +58,10 @@
   &.edit {
     color: $secondary-darker;
 
+    &:disabled {
+      color: $secondary-lighter !important;
+    }
+
     &:hover {
       color: $secondary;
     }
@@ -72,6 +76,10 @@
     opacity: 1;
     margin-right: 10px;
 
+    &:disabled {
+      color: $primary-lighter !important;
+    }
+
     &:hover {
       color: $primary-lighter;
     }
@@ -84,6 +92,11 @@
   &.cancel {
     color: red;
     opacity: 1;
+
+    &:disabled {
+      opacity: 0.6 !important;
+      color: red !important;
+    }
 
     &:hover {
       opacity: 0.7;

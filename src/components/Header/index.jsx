@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 
 import removeUserFromLocalStorage from "../../util/removeUserFromLocalStorage";
 
+import {setAuth} from "../../store/auth/actions";
 import {getUser, deleteUserAction} from "../../store/user/actions";
 import {deleteMemoriesAction} from "../../store/memories/actions";
 
@@ -29,6 +30,7 @@ const Header = () => {
     removeUserFromLocalStorage();
     dispatch(deleteUserAction());
     dispatch(deleteMemoriesAction());
+    dispatch(setAuth(null));
     navigate('/signIn');
   }
 
