@@ -1,8 +1,8 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
-import {setAuth} from "../../store/auth/actions";
+import {logOut} from "../../store/auth/actions";
 import {getUser, deleteUserAction} from "../../store/user/actions";
 import {deleteMemoriesAction} from "../../store/memories/actions";
 
@@ -14,7 +14,6 @@ import "./styles.scss";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const {firstName, lastName, img} = useSelector(({userReducer}) => userReducer);
 
@@ -27,8 +26,7 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(deleteUserAction());
     dispatch(deleteMemoriesAction());
-    dispatch(setAuth(null));
-    navigate('/login');
+    dispatch(logOut());
   }
 
   return (

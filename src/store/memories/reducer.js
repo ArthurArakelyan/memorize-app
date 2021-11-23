@@ -24,7 +24,10 @@ const memoriesReducer = (state = initialState, action = {}) => {
         memories: memories.filter(({id}) => id !== payload)
       }
     case DELETE_MEMORIES:
-      return {...initialState};
+      return {
+        ...initialState,
+        loading: false
+      }
     default:
       return state;
   }

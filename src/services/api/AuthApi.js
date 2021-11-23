@@ -1,6 +1,11 @@
 import initializeFirebaseApp from "../../util/initializeFirebaseApp";
 
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
 
 import UserApi from "./UserApi";
 
@@ -34,8 +39,17 @@ class AuthApi {
     }
   }
 
+  static async logOut() {
+    try {
+      await signOut(auth);
+    } catch(error) {
+      console.error(error);
+      alert(error.message);
+    }
+  }
+
   static getUserId() {
-    return auth.currentUser.uid;
+    return auth.currentUser?.uid;
   }
 
   static checkAuth(callback) {
