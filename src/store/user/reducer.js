@@ -1,10 +1,14 @@
-import {DELETE_USER, GET_USER, SET_USER_IMG, DELETE_USER_IMG, CHANGE_USER_FIELD, CHANGE_USER_EMAIL} from "./actionTypes";
+import {DELETE_USER, GET_USER, START_IMG_LOADING, SET_USER_IMG, DELETE_USER_IMG, CHANGE_USER_FIELD, CHANGE_USER_EMAIL} from "./actionTypes";
 
 const initialState = {
   email: '',
   firstName: '',
   lastName: '',
-  imgUrl: ''
+  img: {
+    url: '',
+    loading: true,
+    error: false
+  }
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -13,20 +17,34 @@ const reducer = (state = initialState, action = {}) => {
   switch(type) {
     case GET_USER:
       return {
-        ...state,
-        ...payload
+        email: payload.email,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        img: {
+          url: payload.imgUrl ? payload.imgUrl : '',
+          loading: false,
+          error: false
+        }
       }
     case DELETE_USER:
       return {...initialState};
+    case START_IMG_LOADING:
+      return {
+        ...state,
+        img: {...initialState.img}
+      }
     case SET_USER_IMG:
       return {
         ...state,
-        imgUrl: payload
+        img: payload
       }
     case DELETE_USER_IMG:
       return {
         ...state,
-        imgUrl: ''
+        img: {
+          ...initialState.img,
+          loading: false
+        }
       }
     case CHANGE_USER_FIELD:
       return {

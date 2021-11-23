@@ -1,5 +1,6 @@
 export const DELETE_USER = 'DELETE_USER';
 export const GET_USER = 'GET_USER';
+export const START_IMG_LOADING = 'START_IMG_LOADING';
 export const SET_USER_IMG = 'SET_USER_IMG';
 export const DELETE_USER_IMG = 'DELETE_USER_IMG';
 export const CHANGE_USER_FIELD = 'CHANGE_USER_FIELD';

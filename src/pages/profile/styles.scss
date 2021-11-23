@@ -13,77 +13,7 @@
   justify-content: flex-start;
   flex-direction: column;
 }
-.profile-info__avatar_wrapper {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  &:hover {
-    .profile-info__avatar_button {
-      user-select: auto;
-      opacity: 1;
-      transform: rotate(0);
-    }
-  }
-}
-.profile-info__avatar {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 50%;
-  overflow: hidden;
-}
-.profile-info__avatar_buttons {
-  position: absolute;
-  top: 0;
-  right: -15px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-.profile-info__avatar_button {
-  font-size: 20px;
-  opacity: 0;
-  user-select: none;
-  transition: color .3s ease-in-out, opacity .3s ease-in-out, transform .27s ease-in-out;
-
-  &:nth-child(2) {
-    margin-top: 10px;
-  }
-}
-.profile-info__avatar_remove {
-  transform: rotate(90deg);
-
-  &:hover {
-    color: red;
-  }
-
-  &:active {
-    color: darkred;
-  }
-}
-.profile-info__avatar_edit {
-  cursor: pointer;
-  transform: rotate(-90deg);
-
-  input {
-    display: none;
-  }
-
-  &:hover {
-    color: $primary-light;
-  }
-
-  &:active {
-    color: $primary-darker;
-  }
-}
 .profile-info__card {
   padding-top: 16px;
 }

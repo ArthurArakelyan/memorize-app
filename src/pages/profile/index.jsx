@@ -1,38 +1,13 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 import Main from "../../components/common/Main";
 import Fields from "./Fields";
-
-import {setUserImgAction, deleteUserImgAction} from "../../store/user/actions";
-
-import avatar from "../../assets/images/avatar.jpg";
+import Avatar from "./Avatar";
 
 import "./styles.scss";
 
 const Profile = () => {
-  const dispatch = useDispatch();
-
-  const {firstName, lastName, imgUrl} = useSelector(({userReducer}) => userReducer);
-
-  const handleAvatarRemove = () => {
-    dispatch(deleteUserImgAction());
-  }
-
-  const handleAvatarChange = ({target: {files}}) => {
-    if(files && files[0]) {
-      if(files[0].size > 5000000) {
-        alert('No more 5MB file size!');
-        return false;
-      }
-
-      if(!files[0].type.includes('image')) {
-        alert('Only image type files');
-        return false;
-      }
-
-      dispatch(setUserImgAction(files[0]));
-    }
-  }
+  const {firstName, lastName} = useSelector(({userReducer}) => userReducer);
 
   return (
     <Main>
@@ -40,26 +15,7 @@ const Profile = () => {
         <div className="container">
           <div className="profile-content">
             <div className="profile-info">
-              <div className="profile-info__avatar_wrapper">
-                <img src={imgUrl ? imgUrl : avatar} alt="Avatar" className="profile-info__avatar" />
-                <div className="profile-info__avatar_buttons">
-                  {imgUrl &&
-                    <button
-                      className="profile-info__avatar_button profile-info__avatar_remove"
-                      onClick={handleAvatarRemove}
-                    >
-                      <i className="fas fa-times" />
-                    </button>
-                  }
-                  <label
-                    className="profile-info__avatar_button profile-info__avatar_edit"
-                    htmlFor="avatar-edit"
-                  >
-                    <input type="file" id="avatar-edit" onChange={handleAvatarChange} />
-                    <i className="far fa-camera-retro" />
-                  </label>
-                </div>
-              </div>
+              <Avatar />
               <div className="profile-info__card">
                 <h3 className="profile-info__card_name">
                   {`${firstName} ${lastName}`}

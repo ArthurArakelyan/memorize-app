@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const {firstName, lastName, imgUrl} = useSelector(({userReducer}) => userReducer);
+  const {firstName, lastName, img} = useSelector(({userReducer}) => userReducer);
 
   useEffect(() => {
     if(!firstName && !lastName) {
@@ -42,7 +42,7 @@ const Header = () => {
             <Link className="header-nav__profile" to="/profile">
               <span>{`${firstName} ${lastName}`}</span>
               <div className="header-nav__profile_avatar_wrapper">
-                <img className="header-nav__profile_avatar" src={imgUrl ? imgUrl : avatar} alt="Avatar" />
+                <img className="header-nav__profile_avatar" src={img.url ? img.url : avatar} alt="Avatar" />
               </div>
             </Link>
             <PrimaryButton onClick={handleLogout} className="header-nav__logout">

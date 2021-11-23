@@ -1,6 +1,6 @@
 import UserApi from "../../services/api/UserApi";
 
-import {GET_USER, DELETE_USER, SET_USER_IMG, DELETE_USER_IMG, CHANGE_USER_FIELD, CHANGE_USER_EMAIL} from "./actionTypes";
+import {GET_USER, DELETE_USER, START_IMG_LOADING, SET_USER_IMG, DELETE_USER_IMG, CHANGE_USER_FIELD, CHANGE_USER_EMAIL} from "./actionTypes";
 
 export function getUser() {
   return async (dispatch) => {
@@ -18,18 +18,36 @@ export function deleteUserAction() {
   }
 }
 
+export function startImgLoading() {
+  return {
+    type: START_IMG_LOADING
+  }
+}
+
 export function setUserImgAction(file) {
   return async (dispatch) => {
+    dispatch(startImgLoading());
+
     const url = await UserApi.setUserImg(file);
+
     dispatch({
       type: SET_USER_IMG,
-      payload: url
+      payload: url ? {
+        url,
+        loading: false,
+        error: false
+      } : {
+        url: '',
+        loading: false,
+        error: true
+      }
     });
   }
 }
 
 export function deleteUserImgAction() {
   return async (dispatch) => {
+    dispatch(startImgLoading());
     await UserApi.deleteUserImg();
     dispatch({type: DELETE_USER_IMG});
   }
