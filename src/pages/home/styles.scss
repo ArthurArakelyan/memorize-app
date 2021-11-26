@@ -38,6 +38,74 @@
 .home-form__group_textarea {
   @include textarea();
 }
+.home-form__image {
+  min-height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+  width: 100%;
+}
+.home-form__image_label {
+  display: flex;
+  align-items: center;
+  color: #000000;
+  transition: color .2s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary;
+  }
+
+  &:active {
+    color: $secondary-darker;
+  }
+
+  span {
+    font-size: 16px;
+  }
+
+  i {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+}
+.home-form__image_input {
+  display: none;
+}
+.home-form__image_info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    width: 94%;
+    user-select: none;
+    font-size: 14px;
+    line-break: anywhere;
+  }
+}
+.home-form__image_info_icon_wrapper {
+  width: 6%;
+  align-self: flex-start;
+
+  i {
+    color: red;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color .2s ease-in-out;
+
+    &:hover {
+      color: rgba(255, 0, 0, .6);
+    }
+
+    &:active {
+      color: darkred;
+    }
+  }
+}
 .home-form__submit {
   text-transform: uppercase;
   margin-top: 20px;

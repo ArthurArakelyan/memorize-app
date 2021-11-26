@@ -1,4 +1,6 @@
 import {getDatabase, ref, get, push, remove, set} from "firebase/database";
+import {getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
+
 import initializeFirebaseApp from "../../util/initializeFirebaseApp";
 
 import AuthApi from "./AuthApi";
@@ -7,6 +9,7 @@ import objectToArray from "../../util/objectToArray";
 
 initializeFirebaseApp();
 const database = getDatabase();
+const storage = getStorage();
 
 class MemoriesApi {
   static async getMemories() {
@@ -26,10 +29,28 @@ class MemoriesApi {
     try {
       const uid = AuthApi.getUserId();
       const memoryRef = push(ref(database, `memories/${uid}`)).key;
-      await set(ref(database, `memories/${uid}/${memoryRef}`), memory);
+      const memoryPath = `memories/${uid}/${memoryRef}`;
+
+      if(memory.image) {
+        await uploadBytes(storageRef(storage, memoryPath), memory.image);
+        const image = await getDownloadURL(storageRef(storage, memoryPath));
+        await set(ref(database, memoryPath), {
+          ...memory,
+          image
+        });
+
+        return {
+          ...memory,
+          id: memoryRef,
+          image
+        };
+      }
+
+      await set(ref(database, memoryPath), memory);
+
       return {
-        id: memoryRef,
-        ...memory
+        ...memory,
+        id: memoryRef
       };
     } catch(error) {
       console.error(error);

@@ -4,6 +4,8 @@ import Loader from "../../../components/common/Loader";
 
 import {deleteUserImgAction, setUserImgAction} from "../../../store/user/actions";
 
+import checkImageFile from "../../../util/checkImageFile";
+
 const AvatarContent = ({imageLoaded, setImageLoaded}) => {
   const dispatch = useDispatch();
 
@@ -15,20 +17,10 @@ const AvatarContent = ({imageLoaded, setImageLoaded}) => {
   }
 
   const handleAvatarChange = ({target: {files}}) => {
-    if(files && files[0]) {
-      if(files[0].size > 5000000) {
-        alert('No more 5MB file size!');
-        return false;
-      }
-
-      if(!files[0].type.includes('image')) {
-        alert('Only image type files');
-        return false;
-      }
-
+    checkImageFile(files, () => {
       setImageLoaded(false);
       dispatch(setUserImgAction(files[0]));
-    }
+    });
   }
 
   if(!imageLoaded) {

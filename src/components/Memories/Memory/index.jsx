@@ -1,4 +1,4 @@
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {deleteMemoryAction} from "../../../store/memories/actions";
 
@@ -7,22 +7,38 @@ import "./styles.scss";
 const Memory = ({memory}) => {
   const dispatch = useDispatch();
 
+  const isLoading = useSelector(({uiReducer}) => uiReducer);
+
   const date = new Date(memory.date);
 
   const handleDelete = () => {
-    dispatch(deleteMemoryAction(memory.id));
+    if(!isLoading) {
+      dispatch(deleteMemoryAction(memory.id));
+    }
   }
 
   return (
     <div className="home-memory">
-      <button onClick={handleDelete} className="home-memory__delete">
+      <button onClick={handleDelete} disabled={isLoading} className="home-memory__delete">
         <i className="fas fa-times" />
       </button>
       <div className="home-memory__header">
-        <span className="home-memory__header_title">{memory.title}</span>
+        <span title={memory.title} className="home-memory__header_title">
+          {memory.title}
+        </span>
       </div>
       <div className="home-memory__main">
-        <p className="home-memory__description">{memory.description}</p>
+        {memory.image &&
+        <a href={memory.image} target="_blank" className="home-memory__image_wrapper">
+          <img src={memory.image} alt="Memory" className="home-memory__image" />
+        </a>
+        }
+
+        {memory.description &&
+        <p className={`home-memory__description ${memory.image ? 'image' : ''}`}>
+          {memory.description}
+        </p>
+        }
       </div>
       <div className="home-memory__footer">
         <p className="home-memory__footer_date">{date.toLocaleDateString()}</p>

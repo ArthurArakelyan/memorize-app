@@ -24,9 +24,9 @@ const Header = () => {
   }, [firstName, lastName]);
 
   const handleLogout = () => {
+    dispatch(logOut());
     dispatch(deleteUserAction());
     dispatch(deleteMemoriesAction());
-    dispatch(logOut());
   }
 
   return (

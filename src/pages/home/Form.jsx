@@ -5,9 +5,12 @@ import {isValid, validate} from "../../services/validators";
 
 import {setMemory} from "../../store/memories/actions";
 
+import checkImageFile from "../../util/checkImageFile";
+
 import homeGroups from "../../constants/homeGroups";
 
 import "./styles.scss";
+import {set} from "firebase/database";
 
 const Form = ({inputRef}) => {
   const dispatch = useDispatch();
@@ -18,6 +21,7 @@ const Form = ({inputRef}) => {
     title: '',
     description: ''
   });
+  const [image, setImage] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = ({target: {name, value}}) => {
@@ -35,13 +39,23 @@ const Form = ({inputRef}) => {
 
     if(validate(data)) {
       setData({title: '', description: ''});
+      setImage(null);
       dispatch(setMemory({
         ...data,
+        image,
         date: Date.now()
       }));
       setSubmitted(false);
     }
   }
+
+  const handleImageUpload = ({target: {files}}) => {
+    checkImageFile(files, () => {
+      setImage(files[0]);
+    });
+  }
+
+  const handleDeleteImage = () => setImage(null);
 
   return (
     <form onSubmit={handleSubmit} className="home-form">
@@ -77,6 +91,24 @@ const Form = ({inputRef}) => {
           </div>
         )
       })}
+
+      <div className="home-form__image">
+        {image ?
+          <div className="home-form__image_info">
+            <div className="home-form__image_info_icon_wrapper">
+              <i onClick={handleDeleteImage} className="fas fa-times" />
+            </div>
+            <span>{image.name}</span>
+          </div>
+          :
+          <label htmlFor="image" className="home-form__image_label">
+            <span>Add Image</span>
+            <i className="far fa-camera-retro" />
+            <input onChange={handleImageUpload} className="home-form__image_input" id="image" type="file" />
+          </label>
+        }
+      </div>
+      
       <button className="home-form__submit" disabled={isLoading}>post</button>
     </form>
   );
