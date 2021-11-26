@@ -10,7 +10,6 @@ import checkImageFile from "../../util/checkImageFile";
 import homeGroups from "../../constants/homeGroups";
 
 import "./styles.scss";
-import {set} from "firebase/database";
 
 const Form = ({inputRef}) => {
   const dispatch = useDispatch();
