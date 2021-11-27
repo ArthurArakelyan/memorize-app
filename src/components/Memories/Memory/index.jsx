@@ -13,7 +13,7 @@ const Memory = ({memory}) => {
 
   const handleDelete = () => {
     if(!isLoading) {
-      dispatch(deleteMemoryAction(memory.id));
+      dispatch(deleteMemoryAction(memory.id, memory.image));
     }
   }
 

@@ -30,12 +30,14 @@ class MemoriesApi {
       const uid = AuthApi.getUserId();
       const memoryRef = push(ref(database, `memories/${uid}`)).key;
       const memoryPath = `memories/${uid}/${memoryRef}`;
+      const description = memory.description ? memory.description : null;
 
       if(memory.image) {
         await uploadBytes(storageRef(storage, memoryPath), memory.image);
         const image = await getDownloadURL(storageRef(storage, memoryPath));
         await set(ref(database, memoryPath), {
           ...memory,
+          description,
           image
         });
 
@@ -46,7 +48,10 @@ class MemoriesApi {
         };
       }
 
-      await set(ref(database, memoryPath), memory);
+      await set(ref(database, memoryPath), {
+        ...memory,
+        description
+      });
 
       return {
         ...memory,
@@ -58,10 +63,15 @@ class MemoriesApi {
     }
   }
 
-  static async deleteMemory(id) {
+  static async deleteMemory(id, image) {
     try {
       const uid = AuthApi.getUserId();
       await remove(ref(database, `memories/${uid}/${id}`));
+
+      if(image) {
+        await deleteObject(storageRef(storage, `memories/${uid}/${id}`));
+      }
+
       return true;
     } catch(error) {
       console.error(error);

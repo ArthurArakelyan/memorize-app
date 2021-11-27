@@ -32,19 +32,26 @@ const Form = ({inputRef}) => {
 
   const handleSubmit = (e) => {
     if(isLoading) return false;
-
     e.preventDefault();
-    setSubmitted(true);
 
     if(validate(data)) {
-      setData({title: '', description: ''});
-      setImage(null);
       dispatch(setMemory({
         ...data,
         image,
         date: Date.now()
       }));
-      setSubmitted(false);
+
+      setData({title: '', description: ''});
+
+      if(image) {
+        setImage(null);
+      }
+
+      if(submitted) {
+        setSubmitted(false);
+      }
+    } else {
+      setSubmitted(true);
     }
   }
 

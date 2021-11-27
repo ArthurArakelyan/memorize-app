@@ -22,10 +22,10 @@ const SignIn = () => {
     e.preventDefault();
     const {email, password} = data;
 
-    setSubmitted(true);
-
     if(validate(data)) {
       dispatch(signIn(email, password));
+    } else {
+      setSubmitted(true);
     }
   }
 

@@ -30,9 +30,9 @@ export function setMemory(memory) {
   }
 }
 
-export function deleteMemoryAction(id) {
+export function deleteMemoryAction(id, image) {
   return async (dispatch) => {
-    const response = await MemoriesApi.deleteMemory(id);
+    const response = await MemoriesApi.deleteMemory(id, image);
     if(response) {
       dispatch({
         type: DELETE_MEMORY,

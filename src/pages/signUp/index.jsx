@@ -25,10 +25,11 @@ const SignUp = () => {
     e.preventDefault();
     const {firstName, lastName, email, password} = data;
 
-    setSubmitted(true);
 
     if(validate(data)) {
       dispatch(signUp(firstName, lastName, email, password));
+    } else {
+      setSubmitted(true);
     }
   }
 

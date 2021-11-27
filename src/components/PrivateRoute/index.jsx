@@ -12,8 +12,8 @@ import Loader from "../common/Loader";
 const PrivateRoute = ({children}) => {
   const dispatch = useDispatch();
 
-  const auth = useSelector((state) => state.authReducer);
-  const isLoading = useSelector((state) => state.uiReducer);
+  const auth = useSelector(({authReducer}) => authReducer);
+  const isLoading = useSelector(({uiReducer}) => uiReducer);
 
   useEffect(() => {
     if(auth === null) {
