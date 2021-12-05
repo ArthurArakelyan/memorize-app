@@ -2,7 +2,9 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 import AuthFormGroup from "./AuthFormGroup";
-import PrimaryButton from "../../common/PrimaryButton";
+import {Form, PrimaryButton} from "../../common";
+
+import {isValid} from "../../../services/validators";
 
 import "./styles.scss";
 
@@ -14,16 +16,15 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
       handleSubmit(e);
     }
   }
-
   return (
-    <form onSubmit={onSubmit} className="auth-form">
+    <Form onSubmit={onSubmit}>
       {groups.map((group, index) => {
         return (
           <AuthFormGroup
             key={group.name}
             value={data[group.name]}
-            data={data}
             group={group}
+            isValid={isValid(group.name, data)}
             submitted={submitted}
             autoFocus={index === 0}
             handleChange={handleChange}
@@ -36,7 +37,7 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
       <Link to={type.link} className="auth-form__link">
         {type.linkName}
       </Link>
-    </form>
+    </Form>
   );
 }
 

@@ -1,0 +1,84 @@
+@import "../../../assets/scss/variables";
+
+.form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.form-group {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+
+  &.invalid {
+    input, textarea {
+      border-color: red !important;
+
+      &:focus {
+        box-shadow: 0 0 3px red !important;
+      }
+    }
+  }
+}
+.form-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: $info;
+  transition: color .2s ease-in-out;
+
+  &__icon {
+    margin-left: 5px;
+    margin-top: 1px;
+    font-size: 12px;
+    color: $info;
+  }
+}
+.form-input {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid $info;
+  padding: 7px 10px;
+  font-size: 16px;
+  transition: border-color .2s ease-in-out, box-shadow .2s ease-in-out;
+
+  &:hover {
+    border-color: $primary-lighter;
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 3px $primary;
+  }
+}
+.form-textarea {
+  resize: none;
+  min-height: 90px;
+  max-height: 100px;
+  font-size: 14px;
+}
+.form-warning {
+  position: absolute;
+  left: 0;
+  top: 102%;
+  transform: translateY(0);
+  opacity: 1;
+  font-size: 14px;
+  color: red;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+
+  &.hide {
+    opacity: 0;
+    transform: translateY(-15%);
+  }
+}

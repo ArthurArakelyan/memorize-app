@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 
-import {deleteMemoryAction} from "../../../store/memories/actions";
+import {deleteMemoryAction} from "../../../../store/memories/actions";
 
 import "./styles.scss";
 

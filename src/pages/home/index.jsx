@@ -1,7 +1,7 @@
 import {useRef} from "react";
 
-import Main from "../../components/common/Main";
-import Memories from "../../components/Memories";
+import {Main} from "../../components/common";
+import Memories from "./Memories";
 import Form from "./Form";
 
 import "./styles.scss";

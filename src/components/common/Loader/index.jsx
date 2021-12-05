@@ -1,3 +1,5 @@
+import {memo} from "react";
+
 import "./styles.scss";
 
 const Loader = () => {
@@ -8,4 +10,4 @@ const Loader = () => {
   );
 }
 
-export default Loader;
+export default memo(Loader);

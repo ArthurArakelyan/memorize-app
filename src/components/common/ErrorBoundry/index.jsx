@@ -1,8 +1,8 @@
-import React from "react";
+import {Component} from "react";
 
 import Error from "../../../pages/error";
 
-class ErrorBoundry extends React.Component {
+class ErrorBoundry extends Component {
   state = {
     error: false
   }

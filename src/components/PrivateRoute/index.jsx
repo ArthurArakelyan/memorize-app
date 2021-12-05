@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 
 import {setAuth} from "../../store/auth/actions";
-import {startLoading} from "../../store/ui/actions";
+import {startLoading, stopLoading} from "../../store/ui/actions";
 
 import AuthApi from "../../services/api/AuthApi";
 
@@ -20,6 +20,7 @@ const PrivateRoute = ({children}) => {
       dispatch(startLoading());
 
       const clearAuthObserver = AuthApi.checkAuth((user) => {
+        if(!user) dispatch(stopLoading());
         dispatch(setAuth(!!user));
       });
 

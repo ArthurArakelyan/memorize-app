@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {isValid, validate} from "../../services/validators";
 
+import {Form} from "../../components/common";
+
 import {setMemory} from "../../store/memories/actions";
 
 import checkImageFile from "../../util/checkImageFile";
@@ -11,7 +13,7 @@ import homeGroups from "../../constants/homeGroups";
 
 import "./styles.scss";
 
-const Form = ({inputRef}) => {
+const MemoriesForm = () => {
   const dispatch = useDispatch();
 
   const isLoading = useSelector(({uiReducer}) => uiReducer);
@@ -64,37 +66,27 @@ const Form = ({inputRef}) => {
   const handleDeleteImage = () => setImage(null);
 
   return (
-    <form onSubmit={handleSubmit} className="home-form">
-      {homeGroups.map(({name, label}) => {
-        const valid = !isValid(name, data) && submitted ? 'invalid' : '';
+    <Form onSubmit={handleSubmit} className="home-form">
+      {homeGroups.map((group) => {
+        const {name, label, message, Component, notRequired} = group;
+
         return (
-          <div key={name} className={`home-form__group ${valid}`}>
-            {name === 'title' ?
-              <input
-                ref={inputRef}
-                className="home-form__group_input"
-                type="text"
-                value={data[name]}
-                onChange={handleChange}
-                name={name}
-                id={name}
-              />
-              :
-              <textarea
-                className="home-form__group_input home-form__group_textarea"
-                value={data[name]}
-                onChange={handleChange}
-                onKeyDown={(e) => {
-                  if(e.keyCode === 13 && !e.shiftKey) {
-                    handleSubmit(e);
-                  }
-                }}
-                name={name}
-                id={name}
-              />
-            }
-            <label className="home-form__group_label" htmlFor={name}>{label}</label>
-          </div>
+          <Form.Group
+            key={name}
+            isRequired={notRequired}
+            isValid={isValid(name, data)}
+            name={name}
+            label={label}
+            warning={message}
+          >
+            <Component
+              type="text"
+              value={data[name]}
+              onChange={handleChange}
+              name={name}
+              id={name}
+            />
+          </Form.Group>
         )
       })}
 
@@ -116,8 +108,8 @@ const Form = ({inputRef}) => {
       </div>
       
       <button className="home-form__submit" disabled={isLoading}>post</button>
-    </form>
+    </Form>
   );
 }
 
-export default Form;
+export default MemoriesForm;

@@ -2,9 +2,9 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import Memory from "./Memory";
-import Loader from "../common/Loader";
+import Loader from "../../../components/common/Loader";
 
-import {getMemories} from "../../store/memories/actions";
+import {getMemories} from "../../../store/memories/actions";
 
 import "./styles.scss";
 
@@ -42,7 +42,7 @@ const Memories = ({inputRef}) => {
 
     return (
       <h3 className="home-memories__empty">
-        You aren't have memories. <button onClick={handleFocus}>Create new?</button>
+        You aren't have memories. <button onClick={handleFocus}>Create new</button>
       </h3>
     );
   }

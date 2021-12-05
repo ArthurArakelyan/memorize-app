@@ -1,5 +1,4 @@
 @import "../../assets/scss/variables";
-@import "../../assets/scss/mixins";
 
 .home-content {
   width: 100%;
@@ -25,18 +24,6 @@
   align-items: flex-start;
   justify-content: flex-start;
   flex-direction: column;
-}
-.home-form__group {
-  @include field();
-}
-.home-form__group_label {
-  @include label();
-}
-.home-form__group_input {
-  @include input();
-}
-.home-form__group_textarea {
-  @include textarea();
 }
 .home-form__image {
   min-height: 18px;

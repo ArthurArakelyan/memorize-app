@@ -2,6 +2,8 @@ import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
 
+import {Form} from "../../../../components/common";
+
 import {changeUserEmailAction, changeUserFieldAction} from "../../../../store/user/actions";
 
 import "./styles.scss";
@@ -33,7 +35,7 @@ const Field = ({field, editing, setEditing}) => {
 
     if(isLoading) return false;
 
-    if(editingValue.trim() === fieldValue) {
+    if(editingValue.trim() === fieldValue || !editingValue.trim()) {
       handleCancel();
       return false;
     }
@@ -56,20 +58,23 @@ const Field = ({field, editing, setEditing}) => {
 
   return (
     <div className="profile-edit__field" ref={isEditing ? ref : null}>
+      <label className="label profile-edit__field_label" htmlFor={field.name}>
+        {field.label}
+      </label>
       <div className="profile-edit__field_name_wrapper">
         {isEditing ?
           <form onSubmit={handleSubmit} className="profile-edit__field_name_form">
             <input
-              autoFocus
               className="profile-edit__field_name_form_input"
               type={field.type}
               value={editingValue}
               onChange={({target: {value}}) => setEditingValue(value)}
               name={field.name}
+              autoFocus
             />
           </form>
           :
-          <p className="profile-edit__field_name">
+          <p className="profile-edit__field_name" onClick={handleEdit}>
             {fieldValue}
           </p>
         }
@@ -102,9 +107,6 @@ const Field = ({field, editing, setEditing}) => {
           }
         </div>
       </div>
-      <label className="profile-edit__field_label" htmlFor={field.name}>
-        {field.label}
-      </label>
     </div>
   );
 }

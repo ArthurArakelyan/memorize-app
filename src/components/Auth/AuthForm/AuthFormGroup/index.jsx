@@ -1,14 +1,19 @@
+import {Form} from "../../../common";
+
 import "./styles.scss";
 
-import {isValid} from "../../../../services/validators";
-
-const AuthFormGroup = ({group, value, data, submitted, autoFocus, handleChange}) => {
-  const {name, type, label} = group;
+const AuthFormGroup = ({group, value, isValid, submitted, autoFocus, handleChange}) => {
+  const {name, type, label, message} = group;
 
   return (
-    <div className={`auth-form__group ${!isValid(name, data) && submitted ? 'invalid' : ''}`}>
-      <input
-        className="auth-form__group_input"
+    <Form.Group
+      isValid={isValid}
+      validate={submitted}
+      label={label}
+      warning={message}
+      name={name}
+    >
+      <Form.Input
         value={value}
         type={type}
         name={name}
@@ -16,10 +21,7 @@ const AuthFormGroup = ({group, value, data, submitted, autoFocus, handleChange})
         autoFocus={autoFocus}
         onChange={handleChange}
       />
-      <label className="auth-form__group_label" htmlFor={name}>
-        {label}
-      </label>
-    </div>
+    </Form.Group>
   );
 }
 
