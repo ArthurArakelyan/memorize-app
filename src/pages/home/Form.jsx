@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {isValid, validate} from "../../services/validators";
 
-import {Form} from "../../components/common";
+import {Form, PrimaryButton} from "../../components/common";
 
 import {setMemory} from "../../store/memories/actions";
 
@@ -68,12 +68,13 @@ const MemoriesForm = () => {
   return (
     <Form onSubmit={handleSubmit} className="home-form">
       {homeGroups.map((group) => {
-        const {name, label, message, Component, notRequired} = group;
+        const {name, label, message, Component, required} = group;
 
         return (
           <Form.Group
             key={name}
-            isRequired={notRequired}
+            isRequired={required}
+            validate={submitted}
             isValid={isValid(name, data)}
             name={name}
             label={label}
@@ -87,7 +88,7 @@ const MemoriesForm = () => {
               id={name}
             />
           </Form.Group>
-        )
+        );
       })}
 
       <div className="home-form__image">
@@ -107,7 +108,9 @@ const MemoriesForm = () => {
         }
       </div>
       
-      <button className="home-form__submit" disabled={isLoading}>post</button>
+      <PrimaryButton className="home-form__submit" loading={isLoading}>
+        post
+      </PrimaryButton>
     </Form>
   );
 }

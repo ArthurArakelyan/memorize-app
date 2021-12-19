@@ -1,3 +1,4 @@
+import {useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {deleteMemoryAction} from "../../../../store/memories/actions";
@@ -9,7 +10,7 @@ const Memory = ({memory}) => {
 
   const isLoading = useSelector(({uiReducer}) => uiReducer);
 
-  const date = new Date(memory.date);
+  const date = useMemo(() => new Date(memory.date), [memory.date]);
 
   const handleDelete = () => {
     if(!isLoading) {

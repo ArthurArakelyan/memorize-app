@@ -1,8 +1,6 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
-
-import {Form} from "../../../../components/common";
 
 import {changeUserEmailAction, changeUserFieldAction} from "../../../../store/user/actions";
 
@@ -14,7 +12,7 @@ const Field = ({field, editing, setEditing}) => {
   const user = useSelector(({userReducer}) => userReducer);
   const isLoading = useSelector(({uiReducer}) => uiReducer);
 
-  const fieldValue = user[field.name];
+  const fieldValue = useMemo(() => user[field.name], [user, field.name]);
   const isEditing = editing === field.name;
 
   const [editingValue, setEditingValue] = useState(fieldValue);

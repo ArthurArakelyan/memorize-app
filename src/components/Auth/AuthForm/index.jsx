@@ -16,6 +16,7 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
       handleSubmit(e);
     }
   }
+
   return (
     <Form onSubmit={onSubmit}>
       {groups.map((group, index) => {
@@ -31,7 +32,7 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
           />
         );
       })}
-      <PrimaryButton className="auth-form__submit" disabled={isLoading}>
+      <PrimaryButton className="auth-form__submit" loading={isLoading}>
         {type.name}
       </PrimaryButton>
       <Link to={type.link} className="auth-form__link">

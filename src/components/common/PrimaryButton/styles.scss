@@ -1,6 +1,9 @@
 @import "../../../assets/scss/variables";
 
 .button-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 11px 15px;
   font-size: 16px;
   font-weight: 500;
@@ -9,7 +12,7 @@
   border-radius: 6px;
   transition: background-color .2s ease-in-out;
 
-  &:disabled {
+  &:disabled, &.loading {
     background-color: $primary-lighter !important;
   }
 
