@@ -12,29 +12,20 @@ export function setAuth(auth) {
 export function signIn(email, password) {
   return async (dispatch) => {
     const response = await AuthApi.signIn(email, password);
-    dispatch({
-      type: SET_AUTH,
-      payload: !!response
-    });
+    dispatch(setAuth(!!response));
   }
 }
 
 export function signUp(firstName, lastName, email, password) {
   return async (dispatch) => {
     const response = await AuthApi.signUp(firstName, lastName, email, password);
-    dispatch({
-      type: SET_AUTH,
-      payload: !!response
-    });
+    dispatch(setAuth(!!response));
   }
 }
 
 export function logOut() {
   return async (dispatch) => {
     await AuthApi.logOut();
-    dispatch({
-      type: SET_AUTH,
-      payload: false
-    });
+    dispatch(setAuth(false));
   }
 }

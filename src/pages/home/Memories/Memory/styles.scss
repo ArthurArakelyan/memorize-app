@@ -89,6 +89,7 @@
   justify-content: flex-start;
   flex-direction: column;
   padding: 10px 5px;
+  border-bottom: 1px solid $info;
 }
 .home-memory__image_wrapper {
   width: 100%;
@@ -121,7 +122,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid $info;
   padding: 5px;
 }
 .home-memory__footer_date {

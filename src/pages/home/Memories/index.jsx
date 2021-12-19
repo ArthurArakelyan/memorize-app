@@ -8,7 +8,7 @@ import {getMemories} from "../../../store/memories/actions";
 
 import "./styles.scss";
 
-const Memories = ({inputRef}) => {
+const Memories = () => {
   const dispatch = useDispatch();
 
   const {memories, loading, error} = useSelector(({memoriesReducer}) => memoriesReducer);
@@ -18,8 +18,6 @@ const Memories = ({inputRef}) => {
       dispatch(getMemories());
     }
   }, []);
-
-  const handleFocus = () => inputRef?.current?.focus();
 
   const errorContent = (
     <h3 className="home-memories__error">
@@ -42,7 +40,7 @@ const Memories = ({inputRef}) => {
 
     return (
       <h3 className="home-memories__empty">
-        You aren't have memories. <button onClick={handleFocus}>Create new</button>
+        You aren't have a memories.
       </h3>
     );
   }

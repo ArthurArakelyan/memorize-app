@@ -1,5 +1,3 @@
-import {useRef} from "react";
-
 import {Main} from "../../components/common";
 import Memories from "./Memories";
 import Form from "./Form";
@@ -7,8 +5,6 @@ import Form from "./Form";
 import "./styles.scss";
 
 const Home = () => {
-  const titleInputRef = useRef(null);
-
   return (
     <Main>
       <div className="home">
@@ -18,9 +14,9 @@ const Home = () => {
               <h2 className="home-memories__heading">
                 Memories
               </h2>
-              <Memories inputRef={titleInputRef} />
+              <Memories />
             </div>
-            <Form inputRef={titleInputRef} />
+            <Form />
           </div>
         </div>
       </div>
