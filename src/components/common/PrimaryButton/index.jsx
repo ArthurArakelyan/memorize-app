@@ -1,4 +1,4 @@
-import ButtonLoader from "./Loader";
+import {memo} from "react";
 
 import "./styles.scss";
 
@@ -7,12 +7,11 @@ const PrimaryButton = ({loading, children, className = '', ...other}) => {
     <button
       {...other}
       disabled={loading}
-      className={`button-primary ${loading ? 'loading' : ''} ${className}`}
+      className={`button-primary ${className}`}
     >
       {children}
-      {loading && <ButtonLoader />}
     </button>
   );
 }
 
-export default PrimaryButton;
+export default memo(PrimaryButton);
