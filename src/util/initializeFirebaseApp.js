@@ -3,6 +3,7 @@ import {initializeApp} from "firebase/app";
 const REACT_APP = 'REACT_APP_';
 
 const initializeFirebaseApp = () => {
+  console.log(process.env)
   initializeApp({
     apiKey: process.env[`${REACT_APP}API_KEY`] || process.env.API_KEY,
     authDomain: process.env[`${REACT_APP}AUTH_DOMAIN`] || process.env.AUTH_DOMAIN,
