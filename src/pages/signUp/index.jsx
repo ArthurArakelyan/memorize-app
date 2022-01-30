@@ -7,7 +7,7 @@ import signUpGroups from "../../constants/signUpGroups";
 
 import {signUp} from "../../store/auth/actions";
 
-import {validate} from "../../services/validators";
+import validateFields from "../../util/validateFields";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -25,8 +25,7 @@ const SignUp = () => {
     e.preventDefault();
     const {firstName, lastName, email, password} = data;
 
-
-    if(validate(data)) {
+    if(validateFields(data, signUpGroups)) {
       dispatch(signUp(firstName, lastName, email, password));
     } else {
       setSubmitted(true);

@@ -93,17 +93,8 @@ class UserApi {
   static async changeUserEmail(email) {
     try {
       const user = auth.currentUser;
-      const response = await this.changeUserField('email', email);
-
-      if(response) {
-        try {
-          await updateEmail(user, email);
-        } catch(error) {
-          alert('Try log out and sign in for email change.');
-          console.error(error);
-          alert(error.message);
-        }
-      }
+      await updateEmail(user, email);
+      await this.changeUserField('email', email);
     } catch(error) {
       console.error(error);
       alert(error.message);

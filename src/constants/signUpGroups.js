@@ -1,33 +1,74 @@
+import {emailValidator} from "../util/validators";
+
 const signUpGroups = [
   {
     name: 'firstName',
     type: 'text',
     label: 'First Name',
-    message: 'Please write correct first name'
+    validations: [
+      {
+        required: true,
+        message: 'First name is required',
+      },
+    ],
   },
   {
     name: 'lastName',
     type: 'text',
     label: 'Last Name',
-    message: 'Please write correct last name'
+    validations: [
+      {
+        required: true,
+        message: 'Last name is required',
+      },
+    ],
   },
   {
     name: 'email',
     type: 'email',
     label: 'Email',
-    message: 'Please write correct email'
+    validations: [
+      {
+        required: true,
+        message: 'Email is required',
+      },
+      {
+        custom: emailValidator,
+        message: 'Please write a correct email',
+      },
+    ],
   },
   {
     name: 'password',
     type: 'password',
     label: 'Password',
-    message: 'Minimum 6 symbols'
+    validations: [
+      {
+        required: true,
+        message: 'Password is required',
+      },
+      {
+        min: 6,
+        message: 'Minimum 6 symbols',
+      },
+    ],
   },
   {
     name: 'confirmPassword',
     type: 'password',
     label: 'Confirm Password',
-    message: 'Must match your password'
+    validations: [
+      {
+        custom: (value, data) => {
+          if(data && data.hasOwnProperty('password')) {
+            return value === data.password;
+          }
+
+          return false;
+        },
+        message: 'Must match your password',
+      },
+    ],
   }
 ];
 

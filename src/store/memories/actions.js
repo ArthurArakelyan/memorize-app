@@ -43,5 +43,7 @@ export function deleteMemoryAction(id, image) {
 }
 
 export function deleteMemoriesAction() {
-  return {type: DELETE_MEMORIES};
+  return {
+    type: DELETE_MEMORIES,
+  };
 }

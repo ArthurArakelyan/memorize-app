@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 
-const REACT_APP = 'REACT_APP_';
+import REACT_APP from "../constants/reactApp";
 
 const initializeFirebaseApp = () => {
   initializeApp({

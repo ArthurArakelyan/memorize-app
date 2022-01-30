@@ -4,6 +4,8 @@ import useOutsideClick from "../../../../hooks/useOutsideClick";
 
 import {changeUserEmailAction, changeUserFieldAction} from "../../../../store/user/actions";
 
+import {emailValidator} from "../../../../util/validators";
+
 import "./styles.scss";
 
 const Field = ({field, editing, setEditing}) => {
@@ -13,9 +15,13 @@ const Field = ({field, editing, setEditing}) => {
   const isLoading = useSelector(({uiReducer}) => uiReducer);
 
   const fieldValue = useMemo(() => user[field.name], [user, field.name]);
-  const isEditing = editing === field.name;
+  const isEditing = useMemo(() => editing === field.name, [editing, field]);
 
   const [editingValue, setEditingValue] = useState(fieldValue);
+  const [error, setError] = useState({
+    error: false,
+    message: '',
+  });
 
   const handleEdit = () => {
     if(!isLoading) {
@@ -39,6 +45,12 @@ const Field = ({field, editing, setEditing}) => {
     }
 
     if(field.name === 'email') {
+      if(!emailValidator(editingValue)) {
+        alert('Please enter a valid email');
+        handleCancel();
+        return false;
+      }
+
       dispatch(changeUserEmailAction(editingValue.trim()));
       return false;
     }

@@ -1,5 +1,8 @@
 import "./styles.scss";
 
+import Input from "./components/Input";
+import Textarea from "./components/Textarea";
+
 const Form = ({className = '', children, ...props}) => {
   return (
     <form className={`form ${className}`} {...props}>
@@ -8,9 +11,9 @@ const Form = ({className = '', children, ...props}) => {
   );
 }
 
-Form.Group = ({className = '', name, isValid, validate, isRequired = true, label, warning, children, ...other}) => {
+Form.Group = ({className = '', name, isRequired = true, label, children, ...other}) => {
   return (
-    <div className={`form-group ${!isValid && validate ? 'invalid' : ''} ${className}`} {...other}>
+    <div className={`form-group ${className}`} {...other}>
       {label &&
         <label className="form-label" htmlFor={name}>
           {label}
@@ -20,25 +23,11 @@ Form.Group = ({className = '', name, isValid, validate, isRequired = true, label
         </label>
       }
       {children}
-      {warning &&
-        <p className={`form-warning ${!isValid && validate ? '' : 'hide'}`}>
-          {warning}
-        </p>
-      }
     </div>
   );
 }
 
-Form.Input = ({...props}) => {
-  return (
-    <input className="form-input" {...props} />
-  );
-}
-
-Form.Textarea = ({...props}) => {
-  return (
-    <textarea className="form-input form-textarea" {...props} />
-  );
-}
+Form.Input = Input;
+Form.Textarea = Textarea;
 
 export default Form;

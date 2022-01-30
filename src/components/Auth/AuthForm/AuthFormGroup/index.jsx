@@ -2,15 +2,12 @@ import {Form} from "../../../common";
 
 import "./styles.scss";
 
-const AuthFormGroup = ({group, value, isValid, submitted, autoFocus, handleChange}) => {
-  const {name, type, label, message} = group;
+const AuthFormGroup = ({group, value, submitted, autoFocus, handleChange}) => {
+  const {name, type, label, validations} = group;
 
   return (
     <Form.Group
-      isValid={isValid}
-      validate={submitted}
       label={label}
-      warning={message}
       name={name}
     >
       <Form.Input
@@ -18,6 +15,8 @@ const AuthFormGroup = ({group, value, isValid, submitted, autoFocus, handleChang
         type={type}
         name={name}
         id={name}
+        validations={validations}
+        validate={submitted}
         autoFocus={autoFocus}
         onChange={handleChange}
       />

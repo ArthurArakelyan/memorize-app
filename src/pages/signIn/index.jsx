@@ -5,7 +5,7 @@ import Auth from "../../components/Auth";
 
 import {signIn} from "../../store/auth/actions";
 
-import {validate} from "../../services/validators";
+import validateFields from "../../util/validateFields";
 
 import signInGroups from "../../constants/signInGroups";
 
@@ -22,7 +22,7 @@ const SignIn = () => {
     e.preventDefault();
     const {email, password} = data;
 
-    if(validate(data)) {
+    if(validateFields(data, signInGroups)) {
       dispatch(signIn(email, password));
     } else {
       setSubmitted(true);

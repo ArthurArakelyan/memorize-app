@@ -1,10 +1,10 @@
-import {Component} from "react";
+import {PureComponent} from "react";
 
 import Error from "../../../pages/error";
 
-class ErrorBoundry extends Component {
+class ErrorBoundry extends PureComponent {
   state = {
-    error: false
+    error: false,
   }
 
   componentDidCatch() {

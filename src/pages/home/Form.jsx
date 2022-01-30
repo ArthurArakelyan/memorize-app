@@ -1,12 +1,11 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {isValid, validate} from "../../services/validators";
-
 import {Form, PrimaryButton} from "../../components/common";
 
 import {setMemory} from "../../store/memories/actions";
 
+import validateFields from "../../util/validateFields";
 import checkImageFile from "../../util/checkImageFile";
 
 import homeGroups from "../../constants/homeGroups";
@@ -36,7 +35,7 @@ const MemoriesForm = () => {
     if(isLoading) return false;
     e.preventDefault();
 
-    if(validate(data)) {
+    if(validateFields(data, homeGroups)) {
       dispatch(setMemory({
         ...data,
         image,
@@ -68,21 +67,20 @@ const MemoriesForm = () => {
   return (
     <Form onSubmit={handleSubmit} className="home-form">
       {homeGroups.map((group) => {
-        const {name, label, message, Component, required} = group;
+        const {name, label, validations, Component, required} = group;
 
         return (
           <Form.Group
             key={name}
             isRequired={required}
-            validate={submitted}
-            isValid={isValid(name, data)}
             name={name}
             label={label}
-            warning={message}
           >
             <Component
               type="text"
               value={data[name]}
+              validations={validations}
+              validate={submitted}
               onChange={handleChange}
               name={name}
               id={name}

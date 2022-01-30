@@ -1,15 +1,35 @@
+import {emailValidator} from "../util/validators";
+
 const signInGroups = [
   {
     name: 'email',
     type: 'text',
     label: 'Email',
-    message: 'Please write correct email'
+    validations: [
+      {
+        required: true,
+        message: 'Email is required',
+      },
+      {
+        custom: emailValidator,
+        message: 'Please write a correct email',
+      },
+    ],
   },
   {
     name: 'password',
     type: 'password',
     label: 'Password',
-    message: 'Minimum 6 symbols'
+    validations: [
+      {
+        required: true,
+        message: 'Password is required',
+      },
+      {
+        min: 6,
+        message: 'Minimum 6 symbols',
+      },
+    ],
   }
 ];
 

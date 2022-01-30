@@ -4,8 +4,6 @@ import {Link} from "react-router-dom";
 import AuthFormGroup from "./AuthFormGroup";
 import {Form, PrimaryButton} from "../../common";
 
-import {isValid} from "../../../services/validators";
-
 import "./styles.scss";
 
 const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) => {
@@ -25,7 +23,6 @@ const AuthForm = ({groups, type, data, submitted, handleSubmit, handleChange}) =
             key={group.name}
             value={data[group.name]}
             group={group}
-            isValid={isValid(group.name, data)}
             submitted={submitted}
             autoFocus={index === 0}
             handleChange={handleChange}
