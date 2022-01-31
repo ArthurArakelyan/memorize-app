@@ -3,6 +3,7 @@ import {getStorage, ref as storageRef, uploadBytes, getDownloadURL, deleteObject
 
 import initializeFirebaseApp from "../../util/initializeFirebaseApp";
 
+import Api from './Api';
 import AuthApi from "./AuthApi";
 
 import objectToArray from "../../util/objectToArray";
@@ -11,23 +12,22 @@ initializeFirebaseApp();
 const database = getDatabase();
 const storage = getStorage();
 
-class MemoriesApi {
+class MemoriesApi extends Api {
   static async getMemories() {
     try {
-      const uid = AuthApi.getUserId();
+      const uid = AuthApi.uid;
       const response = await get(ref(database,`memories/${uid}`));
       return objectToArray(response.val()).sort((prev, current) => {
         return new Date(current.date) - new Date(prev.date);
       });
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 
   static async setMemory(memory) {
     try {
-      const uid = AuthApi.getUserId();
+      const uid = AuthApi.uid;
       const memoryRef = push(ref(database, `memories/${uid}`)).key;
       const memoryPath = `memories/${uid}/${memoryRef}`;
       const description = memory.description ? memory.description : null;
@@ -58,14 +58,13 @@ class MemoriesApi {
         id: memoryRef
       };
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 
   static async deleteMemory(id, image) {
     try {
-      const uid = AuthApi.getUserId();
+      const uid = AuthApi.uid;
       await remove(ref(database, `memories/${uid}/${id}`));
 
       if(image) {
@@ -74,8 +73,7 @@ class MemoriesApi {
 
       return true;
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 }

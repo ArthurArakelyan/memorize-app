@@ -7,12 +7,13 @@ import {
   signOut
 } from "firebase/auth";
 
+import Api from "./Api";
 import UserApi from "./UserApi";
 
 initializeFirebaseApp();
 const auth = getAuth();
 
-class AuthApi {
+class AuthApi extends Api {
   static async signIn(email, password) {
     try {
       const response = await signInWithEmailAndPassword(auth, email, password);
@@ -20,8 +21,7 @@ class AuthApi {
 
       return user;
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 
@@ -34,8 +34,7 @@ class AuthApi {
 
       return user;
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 
@@ -43,17 +42,32 @@ class AuthApi {
     try {
       await signOut(auth);
     } catch(error) {
-      console.error(error);
-      alert(error.message);
+      super.errorHandler(error);
     }
   }
 
   static getUserId() {
-    return auth.currentUser?.uid;
+    return getAuth().currentUser?.uid;
   }
 
   static checkAuth(callback) {
     return auth.onAuthStateChanged((user) => callback(user));
+  }
+
+  static get uid() {
+    return this.getUserId();
+  }
+
+  static set uid(value) {
+    throw new Error(`You can\'t change uid. (value: ${value})`);
+  }
+
+  static get user() {
+    return getAuth().currentUser;
+  }
+
+  static set user(value) {
+    throw new Error(`You can\'t change user. (value: ${value})`);
   }
 }
 
